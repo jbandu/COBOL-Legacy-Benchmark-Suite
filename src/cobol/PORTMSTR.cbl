@@ -202,6 +202,8 @@
                MOVE 'Error updating Portfolio' TO WS-ERROR-TEXT
                PERFORM 9000-ERROR
            END-IF
+           
+           PERFORM 2100-LOG-PORTFOLIO-UPDATE
            .
            
        5000-DELETE-PORTFOLIO.
@@ -258,4 +260,29 @@
            MOVE PORT-KEY TO LS-ERROR-DETAILS
            
            CALL 'ERRPROC' USING LS-ERROR-REQUEST
+           .
+
+      *----------------------------------------------------------------*
+      * Example audit logging call
+      *----------------------------------------------------------------*
+       2100-LOG-PORTFOLIO-UPDATE.
+           INITIALIZE LS-AUDIT-REQUEST
+           
+           MOVE 'PORTFOLIO' TO LS-SYSTEM-ID
+           MOVE USERID      TO LS-USER-ID
+           MOVE 'PORTMSTR' TO LS-PROGRAM
+           MOVE TERMINAL-ID TO LS-TERMINAL
+           
+           MOVE 'TRAN'     TO LS-TYPE
+           MOVE 'UPDATE  ' TO LS-ACTION
+           MOVE 'SUCC'     TO LS-STATUS
+           
+           MOVE PORT-ID    TO LS-PORT-ID
+           MOVE PORT-ACCOUNT-NO TO LS-ACCT-NO
+           
+           MOVE WS-BEFORE-IMAGE TO LS-BEFORE-IMAGE
+           MOVE PORT-RECORD     TO LS-AFTER-IMAGE
+           MOVE 'Portfolio updated successfully' TO LS-MESSAGE
+           
+           CALL 'AUDPROC' USING LS-AUDIT-REQUEST
            .
