@@ -119,10 +119,10 @@ This backlog outlines the implementation plan for the Investment Portfolio Manag
 
 2. Data Validation
 
-   - [ ] Portfolio ID validation
-   - [ ] Account number validation
-   - [ ] Investment type validation
-   - [ ] Amount range checks
+   - [x] Portfolio ID validation
+   - [x] Account number validation
+   - [x] Investment type validation
+   - [x] Amount range checks
 
 3. Error Handling
    - [ ] VSAM status code handling
