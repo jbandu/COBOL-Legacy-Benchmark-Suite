@@ -346,3 +346,59 @@ graph TD
 - Resource availability
 - Error rate tracking
 - User session management
+
+## Sprint 4 (Online Integration) - Planning
+
+**Goal**: Implement CICS online inquiry functionality
+
+### Online Programs
+
+1. INQONLN (Main Online Handler)
+
+   - [ ] Basic CICS infrastructure
+   - [ ] Screen mapping
+   - [ ] Portfolio position inquiry
+   - [ ] Transaction history lookup
+   - [ ] Error handling integration
+
+2. Online DB2 Support
+
+   - [ ] Connection pooling
+   - [ ] Read-only access patterns
+   - [ ] Response time optimization
+   - [ ] Error recovery procedures
+
+3. Security Integration
+
+   - [ ] CICS security definitions
+   - [ ] DB2 authorization
+   - [ ] Access logging
+   - [ ] Audit trail integration
+
+4. BMS Screen Definitions
+   - [ ] Main menu
+   - [ ] Portfolio inquiry screen
+   - [ ] Transaction history screen
+   - [ ] Error messages screen
+
+### Infrastructure
+
+1. CICS Resources
+
+   - [ ] Transaction definitions
+   - [ ] Program definitions
+   - [ ] File definitions
+   - [ ] DB2 entry definitions
+
+2. Documentation
+   - [ ] Online user guide
+   - [ ] Operations manual updates
+   - [ ] Security documentation
+   - [ ] Performance guidelines
+
+### Exit Criteria
+
+- Complete INQONLN implementation
+- Working CICS transactions
+- Security integration
+- Documentation updates

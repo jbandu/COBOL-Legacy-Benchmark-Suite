@@ -297,3 +297,53 @@ This backlog outlines the implementation plan for the Investment Portfolio Manag
 3. Developed complete DB2 support infrastructure
 4. Established robust error handling
 5. Added performance monitoring capabilities
+
+## Sprint 4 (Online Integration) - Planning
+
+**Goal**: Implement CICS online inquiry functionality
+
+### Online Programs
+
+1. INQONLN (Main Online Handler)
+
+   - [x] Basic CICS infrastructure
+   - [x] Screen mapping
+   - [x] Portfolio position inquiry
+   - [x] Transaction history lookup
+   - [x] Error handling integration
+
+2. Online DB2 Support
+
+   - [x] Connection pooling
+   - [x] Read-only access patterns
+   - [x] Response time optimization
+   - [x] Error recovery procedures
+
+3. Security Integration
+
+   - [x] CICS security definitions
+   - [x] DB2 authorization
+   - [x] Access logging
+   - [x] Audit trail integration
+
+4. BMS Screen Definitions
+   - [x] Main menu
+   - [x] Portfolio inquiry screen
+   - [x] Transaction history screen
+   - [x] Error messages screen
+
+### Infrastructure
+
+1. CICS Resources
+
+   - [x] Transaction definitions
+   - [x] Program definitions
+   - [x] File definitions
+   - [x] DB2 entry definitions
+
+### Exit Criteria
+
+- Complete INQONLN implementation
+- Working CICS transactions
+- Security integration
+- Documentation updates
