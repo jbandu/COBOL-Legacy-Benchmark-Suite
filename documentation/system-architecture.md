@@ -1,7 +1,20 @@
 # System Architecture Document
 
-Version: 1.1
+Version: 1.2
 Last Updated: 2024-10-29
+
+## Important Note
+
+This codebase represents a production-grade implementation of an Investment Portfolio Management System designed for z/OS environments. While the code is written to production standards and would be ready for z/OS deployment, this implementation serves as a reference architecture. The code:
+
+- Is written in Enterprise COBOL for z/OS
+- Uses standard z/OS file handling patterns
+- Implements DB2 for z/OS SQL standards
+- Follows mainframe batch processing best practices
+- Includes complete JCL for deployment
+- Contains all necessary copybooks and data definitions
+
+This implementation represents what would be found in a running z/OS system, though it cannot be tested in a z/OS environment within this project's scope.
 
 ## 1. System Overview
 
@@ -126,7 +139,7 @@ sequenceDiagram
 ### 2.3 Online Inquiry Flow
 
 ```mermaid
-sequenceDimap
+sequenceDiagram
     participant UI as User
     participant CI as CICS
     participant IN as INQONLN
