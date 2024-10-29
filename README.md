@@ -1,35 +1,97 @@
 # Investment Portfolio Management System
 
-![CLBS Logo](./documentation/images/CLBS-logo.png)
+[![Project Status: Active](https://img.shields.io/badge/Project%20Status-Active-green.svg)]()
+[![COBOL](https://img.shields.io/badge/COBOL-Enterprise-blue.svg)]()
 
-## Overview
+A production-grade implementation of an Investment Portfolio Management System created for testing LLM translation of real world legacy applications.
 
-This repository contains a production-grade implementation of an Investment Portfolio Management System designed for z/OS environments. The system is written in Enterprise COBOL and follows mainframe development best practices and standards.
+## Project Overview
 
-## Important Implementation Note
+This project demonstrates a complete z/OS COBOL-based portfolio management system, implementing industry-standard patterns and practices. It serves as a reference implementation for:
 
-This codebase is designed as a reference architecture that demonstrates production-quality mainframe development patterns. While the code is written to production standards and would be ready for z/OS deployment, it is not intended to be executed within this project's scope. The implementation:
+- Legacy system architecture and design
+- COBOL best practices
+- Mainframe data handling patterns
+- Production-grade error handling and validation
 
-- Uses Enterprise COBOL for z/OS
-- Implements standard z/OS batch processing patterns
-- Includes complete VSAM and DB2 integration
-- Contains production-ready JCL
-- Provides comprehensive copybook libraries
-- Follows mainframe development best practices
+### Key Features
 
-## Repository Structure
+- Portfolio master file management (VSAM KSDS)
+- Transaction processing
+- Financial calculations and balance management
+- Comprehensive error handling and validation
+- DB2 database integration
 
+## Development Approach
+
+This project is being developed through LLM pair programming, specifically using Claude 3.5 Sonnet. The development process:
+
+1. Uses standard mainframe development patterns
+2. Implements full error handling and validation
+3. Includes comprehensive documentation
+4. Follows industry best practices for COBOL development
+
+## Project Structure
+
+The repository is organized following standard mainframe project conventions:
+
+```/
+├── src/
+│   ├── cobol/           # COBOL source programs
+│   ├── copybook/        # COBOL copybooks
+│   ├── jcl/             # JCL procedures
+│   └── sql/             # DB2 DDL and DML
+├── test/
+│   ├── data/           # Test data files
+│   └── scenarios/      # Test scenarios
+├── documentation/
+│   ├── system-architecture.md
+│   ├── data-dictionary.md
+│   ├── development-backlog.md
+│   └── test-data-specs.md
+└── scripts/            # Utility scripts
 ```
-/
-├── src/                    # COBOL source code
-├── jcl/                    # JCL procedures
-├── copy/                   # Copybook libraries
-├── sql/                    # DB2 DDL and DML
-└── documentation/
-    ├── system-architecture.md    # System design and architecture
-    ├── data-dictionary.md        # Data structures and definitions
-    └── development-backlog.md    # Implementation plan
-```
+
+### Key Components
+
+- **COBOL Programs**
+
+  - `PORTMSTR` - Portfolio master file maintenance
+  - `PORTTRAN` - Transaction processing
+  - `PORTBAL` - Balance and reconciliation
+  - `PORTRPT` - Reporting engine
+
+- **Copybooks**
+
+  - `PORTFLIO` - Portfolio record structure
+  - `TRANFILE` - Transaction file layout
+  - `ERRHANDL` - Standard error handling
+  - `SQLCA` - SQL communication area
+
+- **JCL**
+  - `PORTDALY` - Daily processing
+  - `PORTMTH` - Monthly processing
+  - `PORTRSTR` - Restart procedures
+
+## Development Status
+
+Currently in active development:
+
+- Sprint 0: ✅ Complete (Technical Setup)
+- Sprint 1: 🚧 In Progress (Core Portfolio Management)
+
+## Purpose
+
+This project serves as a comprehensive example of how Large Language Models can assist in understanding, documenting, and potentially translating legacy mainframe applications. It provides a complete, working example of a production-grade COBOL application with all the complexity and patterns typically found in real-world systems.
+
+## Documentation
+
+Comprehensive documentation is provided:
+
+- [System Architecture Document (SAD)](documentation/system-architecture.md) detailing the technical design
+- [Data Dictionary](documentation/data-dictionary.md) defining all data structures
+- [Development Backlog](documentation/development-backlog.md)
+- [Test Data Specifications](documentation/test-data-specs.md)
 
 ## Technical Standards
 
@@ -39,16 +101,6 @@ This codebase is designed as a reference architecture that demonstrates producti
 - z/OS batch processing best practices
 - Mainframe security standards
 - Standard JCL conventions
-
-## Documentation
-
-Comprehensive documentation is provided:
-
-- System Architecture Document (SAD) detailing the technical design
-- Data Dictionary defining all data structures
-- Development Backlog outlining the implementation plan
-- Deployment and operational procedures
-- Code review standards
 
 ## Quality Standards
 
