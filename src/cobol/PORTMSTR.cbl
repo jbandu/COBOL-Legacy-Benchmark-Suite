@@ -234,3 +234,28 @@
            PERFORM 6000-TERMINATE
            GOBACK
            .
+
+      *----------------------------------------------------------------*
+      * Example error handling call
+      *----------------------------------------------------------------*
+       2100-HANDLE-VSAM-ERROR.
+           MOVE 'PORTMSTR' TO LS-PROGRAM-ID
+           MOVE ERR-CAT-VSAM TO LS-CATEGORY
+           MOVE WS-FILE-STATUS TO LS-ERROR-CODE
+           
+           EVALUATE WS-FILE-STATUS
+               WHEN ERR-VSAM-DUPKEY
+                   MOVE ERR-WARNING TO LS-SEVERITY
+                   MOVE ERR-VSAM-22 TO LS-ERROR-TEXT
+               WHEN ERR-VSAM-NOTFND
+                   MOVE ERR-WARNING TO LS-SEVERITY
+                   MOVE ERR-VSAM-23 TO LS-ERROR-TEXT
+               WHEN OTHER
+                   MOVE ERR-ERROR TO LS-SEVERITY
+                   MOVE ERR-OTHER TO LS-ERROR-TEXT
+           END-EVALUATE
+           
+           MOVE PORT-KEY TO LS-ERROR-DETAILS
+           
+           CALL 'ERRPROC' USING LS-ERROR-REQUEST
+           .
