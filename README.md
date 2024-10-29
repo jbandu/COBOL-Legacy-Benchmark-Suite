@@ -35,21 +35,38 @@ This project is being developed through LLM pair programming, specifically using
 
 The repository is organized following standard mainframe project conventions:
 
-```/
-├── src/
-│   ├── cobol/           # COBOL source programs
-│   ├── copybook/        # COBOL copybooks
-│   ├── jcl/             # JCL procedures
-│   └── sql/             # DB2 DDL and DML
-├── test/
-│   ├── data/           # Test data files
-│   └── scenarios/      # Test scenarios
-├── documentation/
-│   ├── system-architecture.md
-│   ├── data-dictionary.md
-│   ├── development-backlog.md
-│   └── test-data-specs.md
-└── scripts/            # Utility scripts
+```
+project-root/
+├── documentation/ # Project documentation
+│ ├── assets/ # Shared documentation assets
+│ ├── operations/ # Operational guides and specifications
+│ ├── technical/ # Technical documentation and architecture
+│ └── user/ # User documentation and guides
+│
+└── src/ # Source code root
+  ├── copybook/ # COBOL copybook libraries
+  │ ├── batch/ # Batch processing copybooks
+  │ ├── common/ # Shared system copybooks
+  │ └── db2/ # Database-related copybooks
+  │
+  ├── database/ # Database definitions
+  │ ├── db2/ # DB2 table and index definitions
+  │ └── vsam/ # VSAM file definitions
+  │
+  ├── jcl/ # JCL procedures
+  │ ├── batch/ # Batch processing jobs
+  │ ├── portfolio/ # Portfolio management jobs
+  │ └── utility/ # Utility and maintenance jobs
+  │
+  ├── programs/ # COBOL programs
+  │ ├── batch/ # Batch processing programs
+  │ ├── common/ # Shared utility programs
+  │ └── portfolio/ # Portfolio management programs
+  │
+  └── templates/ # Code templates and standards
+  │ ├── database/ # Database interaction templates
+  │ ├── error/ # Error handling templates
+  │ └── program/ # Standard program templates
 ```
 
 ### Key Components

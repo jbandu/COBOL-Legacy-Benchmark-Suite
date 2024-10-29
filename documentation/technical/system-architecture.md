@@ -35,6 +35,13 @@ graph TB
         BP --> RPT[RPTGEN00]
     end
 
+    subgraph "DB2 Support Layer"
+        DBC[DB2CONN] --> DCM[DB2CMT]
+        DBC --> DER[DB2ERR]
+        DBC --> DST[DB2STAT]
+        HST --> DBC
+    end
+
     subgraph "Online Layer"
         CIC[CICS] --> INQ[INQONLN]
     end
@@ -44,7 +51,7 @@ graph TB
         TRN --> PM[Position Master VSAM]
         POS --> PM
         POS --> TH[Transaction History VSAM]
-        HST --> DB[(DB2 Tables)]
+        DBC --> DB[(DB2 Tables)]
         INQ --> PM
         INQ --> TH
         INQ --> DB
@@ -105,16 +112,20 @@ sequenceDiagram
     participant BCF as BCHCTL
     participant PCF as PRCCTL
     participant PRG as Programs
+    participant DBC as DB2CONN
     participant CHK as Checkpoints
 
     SCH->>PCF: Read Process Schedule
     PCF->>BCF: Initialize Control Record
     BCF->>PRG: Start Process
+    PRG->>DBC: Initialize DB2
     loop Processing
         PRG->>CHK: Write Checkpoint
         CHK->>BCF: Update Status
+        PRG->>DBC: Commit/Rollback
     end
     PRG->>BCF: Update Completion
+    DBC->>DBC: Close Connection
     BCF->>SCH: Signal Next Job
 ```
 
@@ -126,12 +137,21 @@ sequenceDiagram
     participant TV as TRNVAL00
     participant PU as POSUPD00
     participant HL as HISTLD00
+    participant DC as DB2CONN
+    participant CM as DB2CMT
+    participant ST as DB2STAT
     participant RG as RPTGEN00
 
     TF->>TV: Read Transactions
     TV->>TV: Validate
     TV->>PU: Valid Transactions
     PU->>HL: Position Updates
+    HL->>DC: Connect to DB2
+    DC->>CM: Begin Transaction
+    loop Processing
+        HL->>ST: Update Statistics
+        CM->>CM: Commit Point
+    end
     HL->>RG: History Loaded
     RG->>RG: Generate Reports
 ```
@@ -159,24 +179,37 @@ sequenceDiagram
 ### 3.1 File Organization
 
 ```
-/PROD
-├── /CONTROL
-│   ├── BCHCTL    (Batch Control VSAM)
-│   └── PRCCTL    (Process Control)
-├── /DATA
-│   ├── TRANFILE  (Input Transactions)
-│   ├── POSMSTRE  (Position Master VSAM)
-│   └── TRANHIST  (Transaction History VSAM)
-├── /LOAD
-│   ├── TRNVAL00  (Transaction Validation)
-│   ├── POSUPD00  (Position Update)
-│   ├── HISTLD00  (History Load)
-│   ├── RPTGEN00  (Report Generation)
-│   └── INQONLN   (Online Inquiry)
-└── /COPY
-    ├── TRNREC    (Transaction Record)
-    ├── POSREC    (Position Record)
-    └── HISTREC   (History Record)
+project-root/
+├── documentation/ # Project documentation
+│ ├── assets/ # Shared documentation assets
+│ ├── operations/ # Operational guides and specifications
+│ ├── technical/ # Technical documentation and architecture
+│ └── user/ # User documentation and guides
+│
+└── src/ # Source code root
+  ├── copybook/ # COBOL copybook libraries
+  │ ├── batch/ # Batch processing copybooks
+  │ ├── common/ # Shared system copybooks
+  │ └── db2/ # Database-related copybooks
+  │
+  ├── database/ # Database definitions
+  │ ├── db2/ # DB2 table and index definitions
+  │ └── vsam/ # VSAM file definitions
+  │
+  ├── jcl/ # JCL procedures
+  │ ├── batch/ # Batch processing jobs
+  │ ├── portfolio/ # Portfolio management jobs
+  │ └── utility/ # Utility and maintenance jobs
+  │
+  ├── programs/ # COBOL programs
+  │ ├── batch/ # Batch processing programs
+  │ ├── common/ # Shared utility programs
+  │ └── portfolio/ # Portfolio management programs
+  │
+  └── templates/ # Code templates and standards
+  │ ├── database/ # Database interaction templates
+  │ ├── error/ # Error handling templates
+  │ └── program/ # Standard program templates
 ```
 
 ### 3.2 Database Organization
@@ -255,11 +288,15 @@ graph TD
 ```mermaid
 graph TD
     A[Error Detected] -->|Log| B[ERRLOG]
-    B -->|Check| C{Severity}
-    C -->|Critical| D[Abort]
-    C -->|Warning| E[Continue]
-    D --> F[Update BCHCTL]
-    E --> G[Process Next]
+    B -->|DB2 Error| C[DB2ERR]
+    C -->|Process| D{Error Type}
+    D -->|Connection| E[Reconnect]
+    D -->|Data| F[Rollback]
+    D -->|System| G[Abort]
+    E --> H[Resume]
+    F --> H
+    G --> I[Update BCHCTL]
+    H --> J[Continue Processing]
 ```
 
 ## 7. Performance Considerations
