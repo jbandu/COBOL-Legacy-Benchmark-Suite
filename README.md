@@ -1,5 +1,7 @@
 # COBOL-Legacy-Benchmark-Suite (CLBS)
 
+![CLBS Logo](./documentation/images/CLBS-logo.png)
+
 ## Investment Portfolio Management System Reference Implementation
 
 ### Purpose
