@@ -163,10 +163,10 @@ This backlog outlines the implementation plan for the Investment Portfolio Manag
    - [x] Generate audit records
 
 2. Transaction Types
-   - [ ] Buy transactions
-   - [ ] Sell transactions
-   - [ ] Transfer between portfolios
-   - [ ] Fee processing
+   - [x] Buy transactions
+   - [x] Sell transactions
+   - [x] Transfer between portfolios
+   - [x] Fee processing
 
 ### Technical Debt & Infrastructure
 
