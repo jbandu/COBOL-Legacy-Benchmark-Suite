@@ -52,6 +52,10 @@ project-root/
 │   ├── user/              # User documentation and guides
 │   └── assets/            # Shared documentation assets
 │
+├── modern_app/            # FastAPI modernization of the legacy portfolio system
+│   ├── app/              # Application package with routers and models
+│   └── tests/            # API regression tests
+│
 └── src/                   # Source code root
     ├── programs/         # COBOL source programs
     │   ├── batch/       # Batch processing programs
@@ -139,6 +143,10 @@ Comprehensive documentation is provided to facilitate understanding and translat
 - **LLM Translation Training Pairs**: Create benchmark translations to modern languages like Java or C#.
 - **Fine-Tuning LLMs**: Use the project to enhance the capabilities of LLM translation tools in handling complex legacy codebases.
 - **Community Contribution**: Encourage collaboration within the COBOL modernization community to improve and expand the benchmark.
+
+## Modern Reference Implementation
+
+The `modern_app` directory contains a FastAPI service that reimagines the legacy COBOL workflows using Python, SQLModel, and background batch tasks. It exposes REST endpoints for portfolio CRUD operations, online inquiries, and batch-style reporting to demonstrate how the documented user journeys translate into a contemporary architecture.
 
 ## License
 

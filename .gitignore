@@ -1,0 +1,6 @@
+# Virtual environments
+modern_app/.venv/
+
+# Bytecode caches
+__pycache__/
+modern_app/tests/__pycache__/
